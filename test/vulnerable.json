@@ -1,0 +1,19 @@
+
+{
+    "file" : "vulnerable.dump",
+    "starting_function" : "vulnerable",
+    "include_functions" : ["vulnerable"],
+    "parameters" : [{
+        "size" : 4,
+        "confidential" : true
+    }, {
+        "size" : 4,
+        "confidential" : false
+    }],
+    "memory" : true,
+    "result" : {
+        "size" : 4,
+        "confidential" : true
+    }
+}
+
