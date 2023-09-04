@@ -31,27 +31,37 @@ scfdependencies=(
 echo "
 ##### INSTALLING DEPENDENCIES #####
 "
+check sudo apt-get update -y
+check sudo apt-get upgrade -y
 check sudo apt-get install -y ${scfdependencies[@]}
 
 scfsrc=scf17
-scfzip=http://www.mais.informatik.tu-darmstadt.de/assets/tools/$scfsrc.zip
-# if neither src-folder or src zip exist...
-if [ ! -d $scfsrc -a ! -f $scfsrc.zip ]; then
+scfzip=$scfsrc.zip
+download=http://www.mais.informatik.tu-darmstadt.de/assets/tools/$scfzip
+if [ ! -d $scfsrc ]; then
+    # neither source- or zip-files
+    if [ ! -f $scfzip ]; then
+        echo "
+        ##### FETCHING STATIC ANALYSIS SOURCE CODE #####
+        "
+        check wget --no-check-certificate -O $scfzip $download
+    if
     echo "
-    ##### FETCHING STATIC ANALYSIS SOURCE CODE #####
+    ##### UNPACKING SOURCE ZIP #####
     "
-    check wget --no-check-certificate -O $scfsrc.zip $scfzip
-    check sudo rm -rf scf17
     check sudo apt-get install -y unzip
     check unzip scf17.zip
+else
+    echo "
+    ##### FOUND SOURCE CODE - MOVING ON #####
+    "
 fi
 
 echo "
 ##### INSTALLING SCF #####
 "
-cd scf17/scfavr
+cd $scfsrc/scfavr
 check python3.8 -m pip install -U pip
-# check python3.8 -m pip install 
 check sudo python3.8 setup.py install
 cd - > /dev/null
 
