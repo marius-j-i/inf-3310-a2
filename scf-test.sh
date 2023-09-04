@@ -5,23 +5,20 @@ errfile=.scf-test-err.txt
 touch $errfile
 
 make executable
-N=6 ; secret=0 ; public=$((N/2))
 
-echo "
-modulating program secret input with public = $public..."
-for ((i = 0; i < N; i++)); do
+modulate() {
+	N=$1 ; secret=0 ; public=$2
+	echo&&echo "modulating program input secret with static public:=$public"
+	for ((i = 0; i < N; i++)); do
 	./vulnerable $secret $public
 	((secret++))
-done
+	done
+}
 
-secret=0 ; ((public++))
-
-echo "
-modulating program secret input with public = $public..."
-for ((i = 0; i < N; i++)); do
-	./vulnerable $secret $public
-	((secret++))
-done
+N=6
+modulate $N 3
+modulate $N 4
+modulate $N 5
 
 config="vulnerable.json"
 echo "
