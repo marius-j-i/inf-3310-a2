@@ -1,2 +1,3 @@
-# inf-3310-a2
-Advanced security course assignment 2 for TA workspace.
+# INF-3310 - Assignment 2
+
+Resources for 2nd mandatory assignment in advanced security course.
