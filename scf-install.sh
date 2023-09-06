@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 
 logfile=.scf-install-log.txt
 errfile=.scf-install-err.txt
@@ -28,8 +29,7 @@ scfdependencies=(
     avrdude
     make
 )
-echo "
-##### INSTALLING DEPENDENCIES #####
+echo&&echo "##### INSTALLING DEPENDENCIES #####
 "
 check sudo apt-get update -y
 check sudo apt-get upgrade -y
@@ -41,24 +41,20 @@ download=http://www.mais.informatik.tu-darmstadt.de/assets/tools/$scfzip
 if [ ! -d $scfsrc ]; then
     # neither source- or zip-files
     if [ ! -f $scfzip ]; then
-        echo "
-        ##### FETCHING STATIC ANALYSIS SOURCE CODE #####
+        echo&&echo "##### FETCHING STATIC ANALYSIS SOURCE CODE #####
         "
         check wget --no-check-certificate -O $scfzip $download
-    if
-    echo "
-    ##### UNPACKING SOURCE ZIP #####
+    fi
+    echo&&echo "##### UNPACKING SOURCE ZIP #####
     "
     check sudo apt-get install -y unzip
     check unzip scf17.zip
 else
-    echo "
-    ##### FOUND SOURCE CODE - MOVING ON #####
+    echo&&echo "##### FOUND SOURCE CODE - MOVING ON #####
     "
 fi
 
-echo "
-##### INSTALLING SCF #####
+echo&&echo "##### INSTALLING SCF #####
 "
 cd $scfsrc/scfavr
 check python3.8 -m pip install -U pip

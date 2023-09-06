@@ -1,3 +1,6 @@
+#!/usr/bin/bash
+
+# NOTE: script usage is mainly for debugging and might not be a full uninstallation
 
 dependencies=(
     gcc-avr
